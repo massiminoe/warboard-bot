@@ -59,6 +59,7 @@ def col_to_int(df: pd.DataFrame, col: str):
     for i, row in df.iterrows():
         if not isFloat(row[col]):
             df.at[i, col] = '-1'
+    df[col] = df[col].fillna(0)
     df[col] = df[col].astype('float64')
     df[col] = df[col].astype('int64')
 
