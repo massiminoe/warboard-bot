@@ -124,6 +124,7 @@ def read_war_data(war_name: str, printing: bool = False, postprocess: bool = Tru
         war_df['Healing'].replace('Not Found', 0, inplace=True)
         war_df['Score'].replace('Not Found', -1, inplace=True)
         war_df['Score'].replace('', -1, inplace=True)
+        war_df['Score'] = war_df['Score'].astype('float64')
         war_df['Score'] = war_df['Score'].astype('int64')
 
         # Sort by score
