@@ -43,6 +43,26 @@ def get_num_not_found(screenshot_df):
     return num_not_found
 
 
+def isFloat(num):
+    try:
+        float(num)
+        return True
+    except ValueError:
+        return False
+
+
+def col_to_int(df: pd.DataFrame, col: str):
+    """..."""
+    
+    df[col].replace('Not Found', -1, inplace=True)
+    df[col].replace('', -1, inplace=True)
+    for i, row in df.iterrows():
+        if not isFloat(row[col]):
+            df.at[i, col] = '-1'
+    df[col] = df[col].astype('float64')
+    df[col] = df[col].astype('int64')
+
+
 def read_war_data(war_name: str, printing: bool = False, postprocess: bool = True):
     
     # Get all image files
@@ -122,10 +142,7 @@ def read_war_data(war_name: str, printing: bool = False, postprocess: bool = Tru
 
         # Replace 'Not Found' healing values with 0, score values with -1
         war_df['Healing'].replace('Not Found', 0, inplace=True)
-        war_df['Score'].replace('Not Found', -1, inplace=True)
-        war_df['Score'].replace('', -1, inplace=True)
-        war_df['Score'] = war_df['Score'].astype('float64')
-        war_df['Score'] = war_df['Score'].astype('int64')
+        col_to_int(war_df, 'Score')
 
         # Sort by score
         war_df.sort_values(by=['Score'], ascending=False, inplace=True)
