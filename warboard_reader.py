@@ -10,7 +10,7 @@ import cv2
 import pandas as pd
 import os
 from difflib import SequenceMatcher
-from Levenshtein import distance as levenshtein_distance
+from Levenshtein import distance as levenshtein_distance  # V0.12.1
 import shutil
 
 
