@@ -57,7 +57,6 @@ def col_to_int(df: pd.DataFrame, col: str):
     df[col].replace('Not Found', -1, inplace=True)
     df[col].replace('', -1, inplace=True)
     for i, row in df.iterrows():
-        print(row[col])
         if not isFloat(row[col]):
             df.at[i, col] = '-1'
     df[col] = df[col].fillna(0)

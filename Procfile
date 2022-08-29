@@ -1,1 +1,0 @@
-worker: python init_bot.py 
