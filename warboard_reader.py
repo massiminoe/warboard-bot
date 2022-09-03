@@ -10,7 +10,7 @@ import cv2
 import pandas as pd
 import os
 from difflib import SequenceMatcher
-from Levenshtein import distance as levenshtein_distance  # V0.12.1
+#from Levenshtein import distance as levenshtein_distance  # V0.12.1
 import shutil
 
 
@@ -23,7 +23,7 @@ pd.options.mode.chained_assignment = None  # default='warn'
 def similar(a, b):
     """String similarity function"""
 
-    lev_dist = levenshtein_distance(a, b)
+    lev_dist = 0.1#levenshtein_distance(a, b)
     if lev_dist == 1:
         return 0.9
     elif lev_dist == 2:
@@ -71,6 +71,7 @@ def read_war_data(war_name: str, printing: bool = False, postprocess: bool = Tru
     path = os.path.join(os.getcwd(), folder_name)
     files = os.listdir(path)
     images = []
+    print(files)
     for file in files:
         if file.endswith(".jpg") or file.endswith(".png"):
             images.append(file)

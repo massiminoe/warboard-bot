@@ -6,6 +6,7 @@ import discord
 import os
 import shutil
 from discord.ext import commands
+import requests
 
 
 async def upload_data(ctx: commands.Context, env: dict):
@@ -26,11 +27,18 @@ async def save_warboards(ctx: commands.Context, env: dict):
     
     # Save attachments
     num_found = 0
+    #print(f'Attachments: {ctx.message.attachments}')
     async for message in ctx.channel.history(limit=200):
+        print(f'{message.content}: {message.embeds}')
         for attachment in message.attachments:
             num_found += 1
             fn = attachment.filename
             await attachment.save(f'./data/{war_name}/{fn}')
+        for embed in message.embeds:
+            r = requests.get(embed.url)
+            with open(f'./data/{war_name}/embed_{num_found}.png', 'wb') as outfile:
+                outfile.write(r.content)
+            num_found += 1
     print(f'Found {num_found} attachments')
 
     return 0
