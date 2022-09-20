@@ -25,17 +25,13 @@ async def save_warboards(ctx: commands.Context, env: dict):
     if not os.path.isdir(f'./data/{war_name}'):
         os.makedirs(f'./data/{war_name}')
     
-    # Save attachments
     num_found = 0
-    #print(f'Attachments: {ctx.message.attachments}')
     async for message in ctx.channel.history(limit=200):
         for attachment in message.attachments:
-            print(f"attachment: {attachment}")
             num_found += 1
-            fn = attachment.filename
+            fn = f'{num_found}_{attachment.filename}'
             await attachment.save(f'./data/{war_name}/{fn}')
         for embed in message.embeds:
-            print(f"embed: {embed}")
             r = requests.get(embed.url)
             with open(f'./data/{war_name}/embed_{num_found}.png', 'wb') as outfile:
                 outfile.write(r.content)

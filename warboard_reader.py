@@ -71,7 +71,6 @@ def read_war_data(war_name: str, printing: bool = False, postprocess: bool = Tru
     path = os.path.join(os.getcwd(), folder_name)
     files = os.listdir(path)
     images = []
-    print(files)
     for file in files:
         if file.endswith(".jpg") or file.endswith(".png"):
             images.append(file)
