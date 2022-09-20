@@ -43,9 +43,12 @@ def str_to_int(str):
 def get_coords(width):
     """Takes in the width of a screenshot and returns the appropriate set of coords and details"""
 
-    if width == 899:  # Joli res, TODO
+    widths = [900, 1080, 1440]
+    closest_width = min(widths, key=lambda x:abs(x-width))
+
+    if closest_width == 899:  # Joli res, TODO
         pass
-    elif width == 910:  # Omi res
+    elif closest_width == 900:  # Omi res
         x_coords = {
             'Rank': (412, 440),
             'Name': (510, 660),
@@ -59,7 +62,7 @@ def get_coords(width):
         }
         row_height = 51
         start_y = 275
-    elif width == 1080:  # Crank res
+    elif closest_width == 1080:  # Crank res
         x_coords = {
             'Rank': (494, 519),
             'Name': (600, 780),
@@ -73,7 +76,7 @@ def get_coords(width):
         }
         row_height = 60
         start_y = 324
-    elif width == 1440:  # TODO?
+    elif closest_width == 1440:  # TODO?
         pass
     else:  # Auto?
         pass
