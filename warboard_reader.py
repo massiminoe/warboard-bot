@@ -83,7 +83,7 @@ def read_war_data(war_name: str, printing: bool = False, postprocess: bool = Tru
     # Attempt to read images
     war_df = pd.DataFrame(columns=['Rank', 'Name', 'Score', 'Kills', 'Deaths', 'Assists', 'Healing', 'Damage', 'Colour'])
     for count, image in enumerate(images):
-        print(f'Reading image #{count + 1}')
+        print(f'Reading image #{count + 1} ({image})')
         filename = os.path.join(path, image)
 
         # Read Image
