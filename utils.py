@@ -55,7 +55,7 @@ async def del_warboards(ctx: commands.Context, env: dict):
 def validate_ctx(ctx: commands.Context, env: dict, check_thread: bool = False):
     """Validate the context of a command"""
 
-    REQ_ROLE = "members"
+    REQ_ROLES = ["members", "Members", "War Council", "Bandit", "Support Team"]
 
     # Check server
     guild = str(ctx.guild.id)
@@ -64,7 +64,8 @@ def validate_ctx(ctx: commands.Context, env: dict, check_thread: bool = False):
 
     # Check role
     roles = get_roles(ctx.author)
-    if (REQ_ROLE) and (REQ_ROLE not in roles):
+    print(f'[{ctx.message.created_at}] Roles: {roles}')
+    if not (set(REQ_ROLES) & set(roles)):
         return f'Invalid user permissions. Aborting...'
 
     # Check in thread
