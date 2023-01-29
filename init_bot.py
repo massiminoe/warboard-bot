@@ -45,6 +45,7 @@ async def read(ctx: commands.Context):
     """Read and process uploaded warboards in the context's thread."""
 
     war_name = ctx.channel.name
+    war_name = war_name.replace("/", "-")
     await ctx.send(f"Reading {war_name}")
 
     print(f'[{ctx.message.created_at}] {ctx.author.name}: !wb read')
