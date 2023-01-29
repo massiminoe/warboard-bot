@@ -12,7 +12,7 @@ import requests
 async def upload_data(ctx: commands.Context, env: dict):
     """Upload the relevant warboard csv"""
 
-    war_name = ctx.channel.name
+    war_name = ctx.channel.name.replace("/", "-")
     src = os.path.join(os.getcwd(), "data", "raw", f'{war_name} Raw.csv')
     await ctx.send(file=discord.File(src))
 
@@ -21,7 +21,7 @@ async def save_warboards(ctx: commands.Context, env: dict):
     """Save all of the warboard images into the appropriate folder"""
 
     # Ensure folder exists
-    war_name = ctx.channel.name
+    war_name = ctx.channel.name.replace("/", "-")
     if not os.path.isdir(f'./data/{war_name}'):
         os.makedirs(f'./data/{war_name}')
     
@@ -44,7 +44,7 @@ async def save_warboards(ctx: commands.Context, env: dict):
 async def del_warboards(ctx: commands.Context, env: dict):
     """Delete the warboard images associated with a read command"""
     
-    war_name = ctx.channel.name
+    war_name = ctx.channel.name.replace("/", "-")
 
     try:
         shutil.rmtree(f'./data/{war_name}')
